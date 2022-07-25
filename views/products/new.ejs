@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container color-quaternary rounded-2 py-5">
+        <div class="row">
+            <h1 class="text-center"> New Product </h1>
+            <div class="col-6 offset-3">
+                <form action="/products" method="POST" class="validated-form" novalidate enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label" for="name">Object</label>
+                        <input class="form-control" type="text" id="name" name="product[name]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide the name of the product.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Description</label>
+                        <textarea class="form-control " type="text" id="description" name="product[description]"
+                            required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a description of the product.
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="form-file custom-file">
+                            <label for="formFileMultiple" class="form-label">Upload Images</label>
+                            <input type="file" class="form-control custom-file-label" id="formFileMultiple" name="image" multiple required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide an image.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <a href="/products" class="btn color-secondary">Cancel</a>
+                        <button class="btn color-dark">Add Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

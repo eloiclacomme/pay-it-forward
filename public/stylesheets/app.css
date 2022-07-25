@@ -1,0 +1,42 @@
+.card-index {
+    width: 18rem;
+}
+
+.card-img {
+    height: 18rem;
+    object-fit: cover;
+    background-color: black;
+}
+
+.color-primary, .color-primary:hover {
+    background-color: #FEFAE0;
+}
+
+.color-secondary, .color-secondary:hover {
+    background-color: #CCD5AE;
+}
+
+.color-tertiary, .color-tertiary:hover {
+    background-color: #E9EDC9;
+}
+
+.color-dark, .color-dark:hover {
+    background-color: #D4A373;
+}
+
+.color-quaternary, .color-quaternary:hover {
+    background-color: #f2e2ba;
+}
+
+#delete-btn {
+    background-color: #d6a07f;
+}
+
+.btn:active {
+    background-color: initial;
+}
+
+nav {
+    font-size: large;
+    font-weight: bold;
+}

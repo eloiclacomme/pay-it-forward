@@ -1,0 +1,51 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container color-quaternary rounded-2" id="index-container">
+        <% if (products.length) { %>
+            <div class="row ">
+                <% for( let i = 0; i < products.length; i++) { %>
+                    <div class="col-md-4 my-4 text-center">
+                        <div class="container d-flex justify-content-center">
+                            <div class="card card-index shadow">
+                                <img src="<%= products[i].images[0].url %> " class="card-img-top img-fluid card-img" alt="<%= products[i].name %>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= products[i].name %> </h5>
+                                    <a href="/products/<%= products[i]._id %>" class="btn btn-details color-secondary">Details</a>
+                                    <a class="btn btn-claim color-dark" data-bs-toggle="modal" data-bs-target="#confirmModal<%=i%>">Claim</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="confirmModal<%=i%>" tabindex="-1" aria-labelledby="confirmModalLabel:<%=i%>" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel:<%=i%>">Are you sure you wish to claim this item?</h5>
+                                    <a type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+                                </div>
+                                <div class="modal-body">
+                                    Only claim items that will actually be used, as others in your community could otherwise also use them. 
+                                    If you claim this item, we will put you in contact with the owner so you can decide how you will exchange the item. 
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <form action="/products/<%=products[i]._id%>?_method=PATCH" method="POST">
+                                        <button class="btn btn-primary">Yes</button>
+                                    </form> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } else {%> 
+            <div class="text-center py-3">
+                <h1>No products currently available</h1>
+                <h2>Please try again later or try putting one up yourself!</h2>
+            </div>
+            
+        <% } %> 
+    </div>
+
+    

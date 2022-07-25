@@ -1,0 +1,74 @@
+<% layout('layouts/boilerplate') %>
+    <div class="container color-quaternary rounded-2 py-5">
+        <div class="row">
+            <h1 class="text-center"> Edit Product </h1>
+            <div class="col-6 offset-3">
+                <form action="/products/<%=product._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">                    <div class="mb-3">
+                        <label class="form-label" for="name">Name</label>
+                        <input class="form-control" type="text" id="name" name="product[name]" required value="<%= product.name%>">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide the name of the product.
+                        </div>
+                    </div>
+                    <!-- <div class="mb-3">
+                        <label class="form-label" for="image">Image Url</label>
+                        <input class="form-control" type="text" id="image" name="product[image]" required value="<%= product.image%>">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide an image.
+                        </div>
+                    </div> -->
+                    <!-- <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Upload Images</label>
+                        <input type="file" class="form-control" id="formFileMultiple" name="image" multiple required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide an image.
+                        </div>
+                    </div> -->
+                    <!-- <input type="file" name="image" id="" multiple> -->
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Description</label>
+                        <textarea class="form-control " type="text" id="description" name="product[description]"
+                            required><%= product.description %></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a description of the product.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Add Images</label>
+                        <input type="file" class="form-control" id="formFileMultiple" name="image" multiple>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide an image.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <% product.images.forEach(function(img, i) { %>
+                            <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+                            <div class="form-check-inline">
+                                <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                            </div>
+                            <label for="image-<%=i%>">Delete?</label>
+                            <% }) %>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <a href="/products/<%=product._id%>" class="btn color-secondary">Cancel</a>
+                        <button class="btn color-dark">Update Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

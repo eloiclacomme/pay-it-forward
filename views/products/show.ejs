@@ -1,0 +1,89 @@
+<% layout('layouts/boilerplate') %>
+    <div class="d-flex justify-content-end">
+        <a href="/products" class="btn color-dark mb-3 ">All Products</a>
+    </div>
+
+    
+
+    <div class="card mb-3 color-secondary shadow">
+        <div class="row g-0">
+            <div class="col-md-4 card-image show-image">
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <% product.images.forEach((img, i)=> { %>
+                            <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
+                                <img src="<%= img.url %> " class="d-block w-100" alt="">
+                            </div>
+                            <% }) %>
+                    </div>
+                    <% if (product.images.length> 1) { %>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        <% } %>
+                </div>
+            </div>
+            <div class="col-md-8 card-details">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= product.name %> 
+                    </h5>
+                    <h5 class="card-text text-muted">
+                        Submitted by <%= product.owner.username %> 
+                    </h5>
+                    <p class="card-text">
+                        <%= product.description %> 
+                    </p>
+                    
+                </div>
+                <div class="container d-flex flex-column justify-content-end">
+                    <div class="mt-auto">
+                        <div class="d-inline mb-3">
+                            <a class="btn btn-claim color-dark mb-3" data-bs-toggle="modal" data-bs-target="#confirmModal">Claim</a>
+                        </div>
+                        <div class="d-inline mb-3">
+                            <a class="btn mb-3 color-tertiary" href="/products/<%=product._id%>/edit">Edit</a>
+                        </div>
+                        <% if (currentUser && product.owner.equals(currentUser._id)) { %>
+                            <div class="mb-3">
+                                <form action="/products/<%=product._id%>?_method=DELETE" method="POST">
+                                    <button class="btn mb-3" id="delete-btn">Delete</button>
+                                </form>
+                            </div>
+                        <% } %>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmModalLabel">Are you sure you wish to claim this item?</h5>
+              <a type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+            </div>
+            <div class="modal-body">
+                Only claim items that will actually be used, as others in your community could otherwise also use them. 
+                If you claim this item, we will put you in contact with the owner so you can decide how you will exchange the item. 
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form action="/products/<%=product._id%>?_method=PATCH" method="POST">
+                    <button class="btn btn-primary">Yes</button>
+                </form> 
+            </div>
+          </div>
+        </div>
+      </div>
+    
